@@ -1,44 +1,45 @@
 ﻿@model IEnumerable<WebApplication_Books.Models.Book>
 
-@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-
 @{
     ViewData["Title"] = "Books";
 }
 
 <div class="text-center">
-    <h1 class="display-4">My Library</h1>
+    <h1 class="display-4">Books shop</h1>
 </div>
 
 <div class="row">
+    <div class="col-md-12 mb-5">
+        <a class="btn btn-primary shadow-2" asp-controller="Books" asp-action="AddBookView">Add new book</a>
+    </div>
+
     @foreach (var item in Model)
     {
-    <div class="col-4">
-        <div class="card">
-            <div class="card-header">
-                <h1>@item.Title</h1>
-            </div>
-            <div class="card-body">
-                <p class="text-muted">Price of the book: @item.Price &#8364;</p>
-                <div>
-                    @if (item.Count > 10)
-                    {
-                        <span class="text-success float-right">Count of this book in library: @item.Count</span>
-                    }
-                    else
-                    {
-                        <span class="text-danger float-right">Count of this book in library: @item.Count</span>
-                    }
+        <div class="col-4 mb-4">
+            <div class="card">
+                <div class="card-header">
+                    <h1>@item.Title</h1>
+                </div>
+                <div class="card-body">
+                    <p class="text-muted">Price of the book: @decimal.Round(item.Price) &#8364;</p>
+                    <div>
+                        @if (item.Count > 10)
+                        {
+                            <span class="text-success float-right">Count of this book in library: @item.Count</span>
+                        }
+                        else
+                        {
+                            <span class="text-danger float-right">Count of this book in library: @item.Count</span>
+                        }
 
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a class="btn btn-success shadow-2" asp-controller="Books" asp-action="ShowInfo" asp-route-id="@item.ID">Show</a>
+                    <a class="btn btn-secondary shadow-2" asp-controller="Books" asp-action="ShowEditView" asp-route-id="@item.ID">Edit</a>
+                    <a class="btn btn-danger shadow-2" asp-controller="Books" asp-action="ShowDeleteBook" asp-route-id="@item.ID">Delete</a>
                 </div>
             </div>
-            <div class="card-footer">
-                <a class="btn btn-success shadow-2" href="#">Show</a>
-                <a class="btn btn-danger shadow-2"  href="#">Delete</a>
-            </div>
         </div>
-    </div>
     }
 </div>

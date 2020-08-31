@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace WebApplication_Books.Models
 {
-    public class Book
+    public class BookViewModel
     {
         public int ID { get; set; }
         public string Title { get; set; }
