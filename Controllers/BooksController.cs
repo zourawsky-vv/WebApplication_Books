@@ -61,7 +61,7 @@ namespace WebApplication_Books.Controllers
                 return RedirectToAction("Books", "Books");
             }
             
-            return View("Error");
+            return View("Error", model);
         }
 
         [HttpGet]
@@ -107,7 +107,7 @@ namespace WebApplication_Books.Controllers
                 return RedirectToAction("Books", "Books");
             }
 
-            return View("Error");
+            return View("Error", model);
         }
 
         [HttpPost]

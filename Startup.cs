@@ -5,11 +5,13 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using WebApplication_Books.Data;
+using WebApplication_Books.Models;
 
 namespace WebApplication_Books
 {
@@ -27,7 +29,17 @@ namespace WebApplication_Books
         {
             services.AddControllersWithViews();
             services.AddDbContext<ApplicationDbContext>
-                (options => options.UseSqlServer(Configuration.GetConnectionString("MyConnection")));
+                (options => options.UseSqlServer(Configuration.GetConnectionString("MyConnectionBooks")));
+            services.AddDbContext<MyDbContext>
+                (options => options.UseSqlServer(Configuration.GetConnectionString("MyConnectionUsers")));
+            services.AddIdentity<User, IdentityRole>
+                (options =>
+                {
+                    options.Password.RequireDigit = false;
+                    options.Password.RequiredLength = 3;
+                    options.Password.RequireNonAlphanumeric = false;
+                    options.Password.RequireUppercase = false;
+                }).AddEntityFrameworkStores<MyDbContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -48,6 +60,7 @@ namespace WebApplication_Books
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

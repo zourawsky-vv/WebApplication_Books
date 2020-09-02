@@ -1,0 +1,32 @@
+﻿@model WebApplication_Books.Models.ViewModels.SignUpUserViewModel;
+@{
+    ViewData["Title"] = "Sign Up";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Sign Up</h1>
+</div>
+
+<div>
+    <form method="post" asp-controller="Account" asp-action="SignUp">
+        <div class="input-group">
+            <label>First Name</label>
+            <input type="text" class="form-control" asp-for="FirstName" />
+        </div>
+        <div class="input-group">
+            <label>Email</label>
+            <input type="email" class="form-control" asp-for="Email" />
+        </div>
+        <div class="input-group">
+            <label>Password</label>
+            <input type="password" class="form-control" asp-for="Password" />
+        </div>
+        <div class="input-group">
+            <label>Password Check</label>
+            <input type="password" class="form-control" asp-for="PasswordCheck" />
+        </div>
+
+        <button type ="submit" class="btn btn-success">Register</button>
+        <a asp-controller="Home" asp-action="Index" class="btn btn-danger">Cancel</a>
+    </form>
+</div>
