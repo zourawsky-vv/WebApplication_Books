@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using WebApplication_Books.Data;
+using WebApplication_Books.Hubs;
 using WebApplication_Books.Models;
 
 namespace WebApplication_Books
@@ -40,6 +41,7 @@ namespace WebApplication_Books
                     options.Password.RequireNonAlphanumeric = false;
                     options.Password.RequireUppercase = false;
                 }).AddEntityFrameworkStores<MyDbContext>();
+            services.AddSignalR();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -68,6 +70,11 @@ namespace WebApplication_Books
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+            });
+
+            app.UseSignalR(routes =>
+            {
+                routes.MapHub<IndexPageHub>("/indexPageHub");
             });
         }
     }

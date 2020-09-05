@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 using WebApplication_Books.Data;
+using WebApplication_Books.Hubs;
 using WebApplication_Books.Models;
 
 namespace WebApplication_Books.Controllers
@@ -12,10 +14,12 @@ namespace WebApplication_Books.Controllers
     public class BooksController : Controller
     {
         private readonly ApplicationDbContext _database;
+        private readonly IHubContext<IndexPageHub> _indexHub;
 
-        public BooksController(ApplicationDbContext database)
+        public BooksController(ApplicationDbContext database, IHubContext<IndexPageHub> indexHub)
         {
             _database = database;
+            _indexHub = indexHub;
         }
         [HttpGet]
         public IActionResult Books()
@@ -122,6 +126,7 @@ namespace WebApplication_Books.Controllers
 
             await _database.Books.AddAsync(book);
             await _database.SaveChangesAsync();
+            await _indexHub.Clients.All.SendAsync("SendBooksCount", _database.Books.ToList().Count);
 
             return RedirectToAction("Books", "Books");
         }
