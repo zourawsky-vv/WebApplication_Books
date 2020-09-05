@@ -1,11 +1,13 @@
-﻿@{
+﻿@model IEnumerable<WebApplication_Books.Models.Book>
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-    <p>We have <b id="bookCount">0</b> books already</p>
+    <p>We have <b id="bookCount">@Model.Count()</b> books already</p>
 </div>
 
 @section Scripts

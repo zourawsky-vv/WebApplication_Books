@@ -75,6 +75,7 @@ namespace WebApplication_Books
             app.UseSignalR(routes =>
             {
                 routes.MapHub<IndexPageHub>("/indexPageHub");
+                routes.MapHub<BooksPageHub>("/booksPageHub");
             });
         }
     }

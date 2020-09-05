@@ -25,11 +25,11 @@
                     <div>
                         @if (item.Count > 10)
                         {
-                            <span class="text-success float-right">Count of this book in library: @item.Count</span>
+                            <p class="text-success float-right mb-0" id="book-@item.ID">Count of this book in library: @item.Count</p>
                         }
                         else
                         {
-                            <span class="text-danger float-right">Count of this book in library: @item.Count</span>
+                            <p class="text-danger float-right mb-0" id="book-@item.ID">Count of this book in library: @item.Count</p>
                         }
 
                     </div>
@@ -43,3 +43,10 @@
         </div>
     }
 </div>
+
+@section Scripts
+{
+    <script src="~/js/microsoft/signalr/dist/browser/signalr.js"></script>
+
+    <script src="~/js/booksNotification.js"></script>
+}

@@ -5,6 +5,11 @@ using System.Threading.Tasks;
 
 namespace WebApplication_Books.Models
 {
+    public class BookCount
+    {
+        public int ID { get; set; }
+        public int Count { get; set; }
+    }
     public class Book
     {
         public int ID { get; set; }

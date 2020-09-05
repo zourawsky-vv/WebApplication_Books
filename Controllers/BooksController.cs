@@ -15,11 +15,13 @@ namespace WebApplication_Books.Controllers
     {
         private readonly ApplicationDbContext _database;
         private readonly IHubContext<IndexPageHub> _indexHub;
+        private readonly IHubContext<BooksPageHub> _bookHub;
 
-        public BooksController(ApplicationDbContext database, IHubContext<IndexPageHub> indexHub)
+        public BooksController(ApplicationDbContext database, IHubContext<IndexPageHub> indexHub, IHubContext<BooksPageHub> bookHub)
         {
             _database = database;
             _indexHub = indexHub;
+            _bookHub = bookHub;
         }
         [HttpGet]
         public IActionResult Books()
@@ -61,6 +63,17 @@ namespace WebApplication_Books.Controllers
 
                 _database.Books.Update(book);
                 await _database.SaveChangesAsync();
+
+                List<BookCount> booksCount = new List<BookCount>();
+                foreach (var item in _database.Books.ToList())
+                {
+                    booksCount.Add(new BookCount
+                    {
+                        ID = item.ID,
+                        Count = item.Count
+                    });
+                }
+                await _bookHub.Clients.All.SendAsync("CountPerBook", booksCount);
 
                 return RedirectToAction("Books", "Books");
             }
@@ -107,6 +120,7 @@ namespace WebApplication_Books.Controllers
 
                 _database.Books.Remove(book);
                 await _database.SaveChangesAsync();
+                await _indexHub.Clients.All.SendAsync("SendBooksCount", _database.Books.ToList().Count);
 
                 return RedirectToAction("Books", "Books");
             }
