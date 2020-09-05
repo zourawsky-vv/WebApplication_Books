@@ -64,16 +64,25 @@ namespace WebApplication_Books.Controllers
                 _database.Books.Update(book);
                 await _database.SaveChangesAsync();
 
-                List<BookCount> booksCount = new List<BookCount>();
-                foreach (var item in _database.Books.ToList())
+                //List<BookCount> booksCount = new List<BookCount>();
+                //foreach (var item in _database.Books.ToList())
+                //{
+                //    booksCount.Add(new BookCount
+                //    {
+                //        ID = item.ID,
+                //        Count = item.Count
+                //    });
+                //}
+                //await _bookHub.Clients.All.SendAsync("CountPerBook", booksCount);
+
+                var editBook = new Book
                 {
-                    booksCount.Add(new BookCount
-                    {
-                        ID = item.ID,
-                        Count = item.Count
-                    });
-                }
-                await _bookHub.Clients.All.SendAsync("CountPerBook", booksCount);
+                    ID = model.ID,
+                    Title = model.Title,
+                    Price = model.Price,
+                    Count = model.Count
+                };
+                await _bookHub.Clients.All.SendAsync("EditBook", editBook);
 
                 return RedirectToAction("Books", "Books");
             }

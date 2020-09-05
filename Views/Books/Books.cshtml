@@ -18,18 +18,18 @@
         <div class="col-4 mb-4">
             <div class="card">
                 <div class="card-header">
-                    <h1>@item.Title</h1>
+                    <h1 id="bookTitle-@item.ID">@item.Title</h1>
                 </div>
                 <div class="card-body">
-                    <p class="text-muted">Price of the book: @decimal.Round(item.Price) &#8364;</p>
+                    <p class="text-muted" id="bookPrice-@item.ID">Price of the book: @decimal.Round(item.Price)</p>
                     <div>
                         @if (item.Count > 10)
                         {
-                            <p class="text-success float-right mb-0" id="book-@item.ID">Count of this book in library: @item.Count</p>
+                            <p class="text-success float-right mb-0" id="bookCount-@item.ID">Count of this book in library: @item.Count</p>
                         }
                         else
                         {
-                            <p class="text-danger float-right mb-0" id="book-@item.ID">Count of this book in library: @item.Count</p>
+                            <p class="text-danger float-right mb-0" id="bookCount-@item.ID">Count of this book in library: @item.Count</p>
                         }
 
                     </div>
