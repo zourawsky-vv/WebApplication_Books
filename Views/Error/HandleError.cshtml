@@ -1,0 +1,21 @@
+﻿@{
+    ViewData["Title"] = "Error occured";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Error occured</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+    <body>
+        <div class="text-center">
+            <h1 class="display-1">@ViewData["ErrorCode"]</h1>
+            <h4 class="text-muted">@ViewData["ErrorMessage"]</h4>
+        </div>
+    </body>
+</html>

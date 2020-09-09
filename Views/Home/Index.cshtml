@@ -8,11 +8,25 @@
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
     <p>We have <b id="bookCount">@Model.Count()</b> books already</p>
+
+    <div class="align-content-center">
+        <button type="button" class="sw-basic btn btn-primary">Button basic</button>
+        <button type="button" class="sw-success btn btn-success">Button success</button>
+        <button type="button" class="sw-warning btn btn-warning">Button warning</button>
+        <button type="button" class="sw-error btn btn-danger">Button error</button>
+        <button type="button" class="sw-info btn btn-info">Button info</button>
+        <button type="button" class="sw-okcancel btn btn-secondary">OK or Cancel</button>
+        <button type="button" class="sw-prompt btn btn-secondary">Prompt</button>
+        <button type="button" class="sw-ajax btn btn-secondary">Ajax Request</button>
+    </div>
 </div>
 
 @section Scripts
 {
     <script src="~/js/microsoft/signalr/dist/browser/signalr.js"></script>
-
     <script src="~/js/indexNotification.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="~/js/sweetAlert.js"></script>
 }
+
+@*https://sweetalert.js.org/guides/*@
